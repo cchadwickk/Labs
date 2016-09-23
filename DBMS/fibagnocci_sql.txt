@@ -1,0 +1,18 @@
+declare
+n01 number;
+n02 number;
+i number;
+temp number;
+begin
+n01:=0;
+n02:=1;
+i:=1;
+while i<21
+loop
+dbms_output.put_line(i||' : '||n01);
+i:=i+1;
+temp:=n01;
+n01:=n02;
+n02:=n02+temp;
+end loop;
+end;

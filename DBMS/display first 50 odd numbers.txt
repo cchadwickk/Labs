@@ -1,0 +1,16 @@
+declare
+i number;
+cnt number;
+begin
+cnt:=0;
+i:=1;
+while cnt<50
+loop
+if(i mod 2)=1
+then
+dbms_output.put_line(i);
+cnt:=cnt+1;
+end if;
+i:=i+1;
+end loop;
+end;

@@ -1,0 +1,22 @@
+1.
+SQL> SELECT fname FROM emp3032,works_on3032 WHERE (ssn=e_ssn AND d_no=05 AND hou
+rs>10 AND p_no='p04');
+2.
+SQL> SELECT fname FROM emp3032 WHERE ssn IN (SELECT e_ssn FROM works_on3032 GROU
+P BY e_ssn HAVING count(*)=(SELECT count(p_no) FROM project3032));
+3.
+SQL> SELECT lname,fname FROM emp3032 WHERE ssn NOT IN(SELECT e_ssn FROM works_on
+3032);
+4.
+SQL> SELECT P.p_name,sum(W.hours) FROM project3032 P,works_on3032 W WHERE W.p_no
+=P.p_no GROUP BY P.p_name;
+5.
+SQL> SELECT lname FROM emp3032 E, dept3032 D WHERE E.ssn=D.mgr_ssn AND E.ssn NOT
+ IN (SELECT ssn FROM dependent3032);
+6.
+SQL> SELECT * FROM emp3032 WHERE salary>(SELECT avg(salary) FROM emp3032) ORDER
+BY salary DESC;
+7.
+SQL> SELECT fname,address FROM emp3032 E,dept_location3032 D,project3032 P,works
+_on3032 W WHERE E.ssn=W.e_ssn AND W.p_no=P.p_no AND E.d_no=D.d_no AND P.p_locati
+on !=D.d_location;
