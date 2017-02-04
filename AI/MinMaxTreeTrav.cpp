@@ -25,6 +25,7 @@ public:
             }
             cout<<"\n";
         }
+        cout<"\n\n";
     }
     void inputgrid()
     {
@@ -37,6 +38,14 @@ public:
                 cin>>grid[i][j];
             }
         }
+    }
+    bool draw()
+    {
+        for(int i=0;i<3;i++)
+            for(int j=0;j<3;j++)
+                if(grid[i][j]==0)
+                    return 0;
+        return 1;
     }
 };
 
@@ -127,9 +136,56 @@ int rating(tictacgrid a, int player){
 
 int main()
 {
-    tictacgrid a;
-    a.inputgrid();
-    a.printgrid();
-    cout<<"\nRating for 1, rating for 4 :\n"<<rating(a, 1)<<" , "<<rating(a, 4);
+    tictacgrid a,temp;
+    int moov,moves[10],pos,maxrating,newrate;
+    // cout<<"\nRating for 1, rating for 4 :\n"<<rating(a, 1)<<" , "<<rating(a, 4);
+    cout<<"Enter 1 for first move,\nEnter 0 for second move\n";
+    cin>>moov;
+    while((rating(a, 1)!=500)&&(rating(a, 4)!=500)&&(!a.draw()))
+    {
+        if(moov)
+        {
+            a.printgrid();
+            cout<<"\n";
+            cout<<"Enter position";
+            cin>>pos;
+            pos--;
+            a.grid[pos/3][pos%3]=1;
+            a.printgrid();
+            cout<<"\n";
+        }
+        else
+        {
+            retpossmoves(a, moves);
+            maxrating=0;
+            for(int i=0; moves[i]>=0; i++)
+            {
+                temp=a;
+                temp.grid[moves[i]/3][moves[i]%3]=4;
+                newrate=rating(temp, 4);
+                if(newrate>maxrating)
+                {
+                    maxrating=newrate;
+                    pos=i;
+                }
+            }
+            a.grid[moves[pos]/3][moves[pos]%3]=4;
+        }
+        moov=!moov;
+    }
+    if((rating(a, 1)==500))
+    {
+        a.printgrid();
+        cout<<"X Won";
+    }
+    if((rating(a, 4)==500))
+    {
+        a.printgrid();
+        cout<<"O Won";
+    }
+    if(a.draw()){
+        a.printgrid();
+        cout<<"Draw";
+    }
     return 0;
 }

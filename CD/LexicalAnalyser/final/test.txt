@@ -1,0 +1,7 @@
+#include<iostream>
+usingnamespace std;//besides using namespace
+main()
+{//inside main function
+	return0;
+}/*outside int a main
+function*/
