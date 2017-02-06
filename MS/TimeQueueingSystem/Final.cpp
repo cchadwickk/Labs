@@ -2,10 +2,10 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<ctime>
-#define ele 100
-#define maxt 300
-#define maxser 10
-#define noOfSims 100
+#define ele 100         //NUMBER OF CUSTOMERS IN EACH SIM
+#define maxt 300        //MAXIMUM VALUE OF T
+#define maxser 10       //MAXIMUM SERVICE TIME
+#define noOfSims 100    //NUMBER OF SIMULATIONS
 using namespace std;
 struct ArrOfTwoEle{
     int t,ser;
