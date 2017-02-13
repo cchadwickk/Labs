@@ -16,8 +16,8 @@ legend('A','B');
 subplot(3,1,2);
 plot(x,(1-AIntB),'r');
 axis([0 10 0 1.05]);
-legend('not(A∩B)')
+legend('not(A int B)')
 subplot(3,1,3);
 plot(x,max(ANot,BNot),'r');
 axis([0 10 0 1.05]);
-legend('not(A)U not(B)')
+legend('not(A) U not(B)')

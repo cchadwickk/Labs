@@ -12,7 +12,7 @@ AggMethod='max'
 DefuzzMethod='centroid'
 
 [Input1]
-Name='Weight'
+Name='Weight(Kg)'
 Range=[0 8]
 NumMFs=3
 MF1='Low':'trimf',[-3.2 0 3.2]
@@ -28,7 +28,7 @@ MF2='Somewhat':'gbellmf',[0.2 2.5 0.5]
 MF3='Very':'trimf',[0.6 1 1.4]
 
 [Output1]
-Name='Time'
+Name='Time(Minutes)'
 Range=[40 90]
 NumMFs=3
 MF1='Low':'trimf',[20 40 60]
@@ -36,7 +36,7 @@ MF2='Medium':'gbellmf',[10 2.5 65]
 MF3='High':'trimf',[70 90 110]
 
 [Output2]
-Name='Speed'
+Name='Speed(RPM)'
 Range=[600 1200]
 NumMFs=3
 MF1='Low':'trimf',[360 600 840]
@@ -44,7 +44,7 @@ MF2='Medium':'gbellmf',[120 2.5 900]
 MF3='High':'trimf',[958.412698412698 1198.4126984127 1438.4126984127]
 
 [Output3]
-Name='WaterLevel'
+Name='WaterLevel(Inches)'
 Range=[12 36]
 NumMFs=3
 MF1='Low':'trimf',[2.4 12 21.6]

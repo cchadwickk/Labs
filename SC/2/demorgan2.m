@@ -18,8 +18,8 @@ legend('A','B');
 subplot(3,1,2);
 plot(x,(1-AUniB),'r');
 axis([0 10 0 1.05]);
-legend('not(AUB)')
+legend('not(A U B)')
 subplot(3,1,3);
 plot(x,min(ANot,BNot),'r');
 axis([0 10 0 1.05]);
-legend('not(A)? not(B)')
+legend('not(A) int not(B)')

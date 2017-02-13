@@ -2,6 +2,7 @@
 #include<iostream>
 #include<string.h>
 #include<stdio.h>
+#include<stdlib.h>
 using namespace std;
 class charFileManager{
 protected:
@@ -20,6 +21,16 @@ public:
         strcpy(oufile,out);
         ifile.open(in);
         ofile.open(out);
+        if(!ifile.good())
+        {
+            cout<<"Error opening read file.\n";
+            exit(1);
+        }
+        if(!ofile.good())
+        {
+            cout<<"Error opening write file.\n";
+            exit(1);
+        }
     }
 
     void filechange(){              //rename files, create backup files

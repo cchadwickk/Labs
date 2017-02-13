@@ -2,22 +2,29 @@
 #include<iostream>
 #include<string.h>
 #include<stdio.h>
+#include<stdlib.h>
 using namespace std;
 class keyword{
+protected:
     char keys[90][18], currString[20],ch;
     char specialChars[25];
-    int keycnt, strcnt;
+    int keycnt, strcnt, line;
     ifstream ifile;
 public:
     keyword(){
         keycnt=0;
         strcnt=0;
-        strcpy(specialChars,"(),[]\n#<> .;\t{}=<>!:\0");
+        line=0;
+        strcpy(specialChars,"(),[]\n#<>+/- .;\t{}=<>!:\0");
     }
 
     void openfile(char in[])        //open input file
     {
         ifile.open(in);
+        if(!ifile.good()){
+            cout<<"Error opening input file";
+            exit(1);
+        }
     }
     void closefile()                //close input file
     {
@@ -28,6 +35,8 @@ public:
         ifile.get(ch);
         if(ifile.eof())
             return -1;
+        if(ch=='\n')
+            line++;
         return ch;
     }
     void loadKeyFile(char str[]){   //read keyword file(str[]) and store in keys[]
@@ -36,7 +45,6 @@ public:
         while(!keyFile.eof())
             keyFile.getline(keys[keycnt++],80);
         keyFile.close();
-        cout<<keycnt<<" keys loaded successfully\n";
     }
     int findMatch(){                //use binsrch to match currString to one of keys[]
         if(strcnt<=2)
@@ -73,11 +81,19 @@ public:
     void printCurr()                   //print current string
     {
         if((currString[0]!='\0')&&(strcnt!=0))
-            cout<<currString<<endl;
+            cout<<currString;
+    }
+    void printLine()
+    {
+        cout<<"Line: "<<line;
     }
     void resetStrCnt()                  //empty currString
     {
         strcnt=0;
+    }
+    int retStrCnt()
+    {
+        return strcnt;
     }
     char c()                            //return currently read char
     {
