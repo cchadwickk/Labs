@@ -15,11 +15,11 @@ void addConn(int &addTo, int toAdd)
     addTo=addTo*10+toAdd;
 }
 
-op moveConns(op a,int toMove=1)
+op moveConns(op a,int toMove)
 {
-    for(int i=0;i<a.final;i++)
+    for(int i=a.final;i>=0;i--)
     {
-        for(int j=0;j<noOfOps;j++)
+        for(int j=0;j<=noOfOps;j++)
         {
             if(a.table[i][j]>=0)
                 a.table[i+toMove][j]=a.table[i][j]+toMove;
@@ -29,10 +29,8 @@ op moveConns(op a,int toMove=1)
     }
     a.final+=toMove;
     for(int i=0;i<toMove;i++)
-    {
-        for(int j=0;j<noOfOps;j++)
+        for(int j=0;j<=noOfOps;j++)
             a.table[i][j]=-1;
-    }
     return a;
 }
 
@@ -54,7 +52,7 @@ op copyAfter(op dest, op src)
 
 op applyKleene(op a)
 {
-    a=moveConns(a);
+    a=moveConns(a,1);
     a.final++;
     for(int i=0;i<=noOfOps;i++)
         a.table[a.final][i]=-1;
@@ -67,26 +65,9 @@ op applyKleene(op a)
 
 op applyConc(op a, op b)
 {
-    addConn(a.table[a.final][noOfOps], a.final+1);
+    a.final--;
     a=copyAfter(a, b);
     return a;
-}
-
-op applyAlter(op a, op b)
-{
-    a=moveConns(a);
-    addConn(a.table[0][noOfOps], 1);
-    addConn(a.table[0][noOfOps], a.final+1);
-    addConn(a.table[a.final][noOfOps], a.final+b.final+2);
-    a=copyAfter(a, b);
-    addConn(a.table[a.final][noOfOps], a.final+1);
-    a.final+=1;
-    return a;
-}
-
-int isOp(char ch)
-{
-    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
 }
 
 void printOp(op a)
@@ -108,6 +89,24 @@ void printOp(op a)
         cout<<endl;
     }
 }
+
+op applyAlter(op a, op b)
+{
+    a=moveConns(a,1);
+    addConn(a.table[0][noOfOps], 1);
+    addConn(a.table[0][noOfOps], a.final+1);
+    addConn(a.table[a.final][noOfOps], a.final+b.final+2);
+    a=copyAfter(a, b);
+    addConn(a.table[a.final][noOfOps], a.final+1);
+    a.final++;
+    return a;
+}
+
+int isOp(char ch)
+{
+    return (ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z');
+}
+
 
 op createOp(char a)
 {
@@ -145,18 +144,18 @@ int main()
             a=applyKleene(a);
             pushOp(stackOp,a);
         }
-        else if(exp[i]=='+')
+        else if(exp[i]=='|')
         {
             b=popOp(stackOp);
             a=popOp(stackOp);
-            a=applyConc(a, b);
+            a=applyAlter(a, b);
             pushOp(stackOp,a);
         }
         else if(exp[i]=='.')
         {
             b=popOp(stackOp);
             a=popOp(stackOp);
-            a=applyAlter(a, b);
+            a=applyConc(a, b);
             pushOp(stackOp,a);
         }
     }

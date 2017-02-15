@@ -51,9 +51,9 @@ int isOperand(char ch)
 
 int Prec(char ch)
 {
-    if(ch=='.')
+    if(ch=='|')
         return 1;
-    else if(ch=='+')
+    else if(ch=='.')
         return 2;
     else if(ch=='*')
         return 3;
