@@ -20,9 +20,9 @@ main()
     //ofstream out("abc.txt");
     avgOfAvg=0;
     srand(time(0));
-    for(j=0;j<1;j++)            //LOOP FOR POLICIES
+    for(j=0;j<9;j++)            //LOOP FOR POLICIES
     {
-        out<<endl<<endl<<endl<<"\t\t"<<j<<" POLICY"<<endl<<endl<<endl;
+        //out<<endl<<endl<<endl<<"\t\t"<<j<<" POLICY"<<endl<<endl<<endl;
         s=stat[j].s;
         S=stat[j].S;
         avgCost=0;
@@ -47,28 +47,21 @@ main()
                 else if((curr+IID)>deltime)           //NEW INVENTORY ARRIVES BEFORE NEXT DEMAND ?
                 {
                     if(I<0)                         //IF ALREADY BACKLOG
-                    {
                         IMinus+=((deltime-curr)*(-I));
-                    }
                     else
-                    {
                         IPlus+=((deltime-curr)*I);
-                    }
                     I+=Z;
                     IID-=(deltime-curr);
                     curr=deltime;
                     deltime=INT_MAX;
                 }
 
-                else if(floor(curr+IID)>floor(curr))      //IF MONTH CHANGES
+                else if( (floor(curr+IID)>floor(curr))&&(I<s) )      //IF MONTH CHANGES, AND INV IS LESS THAN THRESHHOLD
                 {
-                    if(I<s)
-                    {
                         Z=S-I;
                         cost+=K+i*Z;
                         deltime=((float)rand()/(float)(RAND_MAX/0.5))+0.5;
                         deltime+=floor(curr+IID) ;
-                    }
                 }
 
 

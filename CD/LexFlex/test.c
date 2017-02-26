@@ -6,5 +6,7 @@ main()
     /*comment
     comment*/
 	kj;
+	int a;
+	char str[10]="hello";
 	/* alksjdljk*/
 }
