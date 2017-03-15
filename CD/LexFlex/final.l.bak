@@ -24,7 +24,7 @@ keylist ("int"|"main"|"if"|"else"|"printf"|"scanf"|"char"|"return"|"void"|"for"|
 
 "/*"[^*/]*\*+\/			{ printf("Comment removed at %d\n",lines); }
 
- \".*\"			{ fprintf(yyout , yytext); } 
+\".*\"				{ fprintf(yyout , yytext); } 
 
 \/\/.*\n			{ fprintf(yyout , "\n"); printf("Comment removed at %d\n",lines); }
 

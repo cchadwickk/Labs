@@ -12,21 +12,21 @@
 keylist ("int"|"main"|"if"|"else"|"printf"|"scanf"|"char"|"return"|"void"|"for"|"while"|"do"|"long"|"float")  
 %%
 
-\n				{ lines++; fprintf(yyout  , yytext); }
+\n			{ lines++; fprintf(yyout  , yytext); }
 
-#include<.*.h>			{ fprintf(yyout , yytext); }
+#include<.*.h>		{ fprintf(yyout , yytext); }
 
-"%"				{ fprintf(yyout , "%%"); }
+"%"			{ fprintf(yyout , "%%"); }
 
-{keylist} 			{ strcpy(keywords[keys++] , yytext); fprintf(yyout , yytext); }
+{keylist} 		{ strcpy(keywords[keys++] , yytext); fprintf(yyout , yytext); }
 
-[A-Za-z_][A-Za-z_0-9]*		{ fprintf(yyout , yytext); strcpy(identifiers[iden++] , yytext); }
+[A-Za-z_][A-Za-z_0-9]*	{ fprintf(yyout , yytext); strcpy(identifiers[iden++] , yytext); }
 
-"/*"[^*/]*\*+\/			{ printf("Comment removed at %d\n",lines); }
+"/*"[^*/]*\*+\/		{ printf("Comment removed at %d\n",lines); }
 
-\".*\"				{ fprintf(yyout , yytext); } 
+\".*\"			{ fprintf(yyout , yytext); } 
 
-\/\/.*\n			{ fprintf(yyout , "\n"); printf("Comment removed at %d\n",lines); }
+\/\/.*\n		{ fprintf(yyout , "\n"); printf("Comment removed at %d\n",lines); }
 
 %%
 

@@ -17,7 +17,7 @@ using namespace std;
 main()
 {
     int oInd=0,dpos,pdpos,val,pInd=0,alreadyE=0;
-    char str[20],out[10][20],alpha[20],print[10][20];
+    char str[20],out[10][20],alpha[20],print[10][20],eps=141;
     cout<<"Enter string in format A=Aa|b\n";
     cout<<"Where, A and a,b are non terminal and terminals respectively\n";
     cin>>str;
@@ -25,7 +25,6 @@ main()
     for( dpos=0; str[dpos]!='|'; dpos++ );
     strcpy(out[oInd], &str[2]);
     out[oInd++][dpos-2]='\0';
-    cout<<out[oInd-1]<<endl;
     strcpy(alpha,out[0]);
     while(1)
     {
@@ -35,7 +34,6 @@ main()
             break;
         strcpy(out[oInd], &str[pdpos+1]);
         out[oInd][(dpos-pdpos)-1]='\0';
-        cout<<out[oInd]<<endl;
 
         if(strc(alpha,out[oInd]))
         {
@@ -45,18 +43,17 @@ main()
         }
         oInd++;
     }
-    cout<<val<<endl;
 
     strcpy(print[pInd],str);
     print[pInd][2+val]='\0';
     strcat(print[pInd], "Z");
     strcat(print[pInd], &str[pdpos]);
-    print[pInd][strlen(print[pInd])-1]='\0';
     pInd++;
 
     strcpy(print[pInd],"Z=");
     for(int i=0; i<oInd; i++)
     {
+        cout<<print[1]<<endl;
         if(strlen(out[i])>val)
         {
             strcat(print[pInd], &out[i][val]);
