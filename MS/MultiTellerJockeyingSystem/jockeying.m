@@ -58,4 +58,6 @@ while ( time <= endTime )
             queues(minArrInd,find1(queues(minArrInd))) = queues(minArrLen,find1(queues(minArrLen)));
             queues(minArrLen,find1(queues(minArrLen))) = 0;
         end
+    end
+end
         
