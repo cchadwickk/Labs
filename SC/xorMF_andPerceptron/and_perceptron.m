@@ -2,7 +2,7 @@ clear;
 clc;
 x=[1 1 -1 -1;1 -1 1 -1];
 t=[1 -1 -1 -1];
-out=zeros(4,9);
+out=zeros(4,8);
 out(1:4,1)=x(1,1:4)';
 out(1:4,2)=x(2,1:4)';
 out(1:4,4)=t';
@@ -15,7 +15,7 @@ epoch=1;
 while flag==1
     flag=0;
     disp(strcat('Epoch=',num2str(epoch)));
-    disp('x y b t yin y w1 w2 wb');
+    disp('     x     y     b     t    yin    y     w1    w2');
     for i=1:4
         yin=b+x(1,i)*w(1)+x(2,i)*w(2);
         if yin>theta
@@ -31,11 +31,15 @@ while flag==1
             flag=1;
             for j=1:2
                 w(j)=w(j)+alpha*t(i)*x(j,i);
+                out(i,6+j)=w(j);
             end
             b=b+alpha*t(i);
         end
         out(i,3)=b;
+        out(i,5)=yin;
+        out(i,6)=y;
     end
+    disp(out);
     epoch=epoch+1;
 end
 disp('Weight matrix');

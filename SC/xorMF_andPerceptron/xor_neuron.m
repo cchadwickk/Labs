@@ -1,5 +1,5 @@
 clear;
-clc;
+%clc;
 a1=input('A a1=');
 a2=input('A a2=');
 b1=input('B b1=');
