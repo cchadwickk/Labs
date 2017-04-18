@@ -1,7 +1,7 @@
 clear all;
 clc;
 
-empty=9999999;
+empty=9999999;                  %Simulate the telephone line system
 redial=zeros(1000,2);
 redial(:,:)=empty;
 redBeg=1;
@@ -21,8 +21,6 @@ calls=round(40+120*rand(1000,1))';
 for i=2:1000
     calls(i)=calls(i-1)+calls(i);
 end
-fprintf('CALLS:\n');
-calls'
 
 while callInd<=1000
     i=callInd;
@@ -83,9 +81,10 @@ while callInd<=1000
     end
 end
 
-fprintf('Successful calls: %d\nPercentage: %d%%\n',success,round(success/10));
-fprintf('Calls successful after redial: %d\n\n',redSuccess);
 utilized=(time*2)-emptyTime;
 totalTime=time*2;
+
+fprintf('Successful calls: %d\nPercentage: %d%%\n',success,round(success/10));
+fprintf('Calls successful after redial: %d\n\n',redSuccess);
 fprintf('Time utilized: %d\nTotal time: %d\nUtilization: %.3f\n\n',utilized,totalTime,utilized/totalTime);
 fprintf('Average delay per successful call: %.2f\n',delay/success);
