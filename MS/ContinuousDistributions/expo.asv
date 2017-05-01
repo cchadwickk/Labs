@@ -1,0 +1,11 @@
+close all;
+clear all;
+clc;
+mean = input('Enter mean');
+x = zeros(1,3);
+y = zero(1,3);
+for i=1:3
+    x(i)=rand(1);
+    y(i) = -mean*reallog(x(i));
+end
+x
